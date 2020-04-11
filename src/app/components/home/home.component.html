@@ -1,0 +1,72 @@
+<div class="col-md-12 mt-3" *ngIf="identity">
+  <h1>{{page_title}}</h1>
+  <hr>
+  <div class="card-columns">
+    <div class="card w-100" *ngFor="let video of videos">
+      <div class="card-header">
+        <h5>{{video.title}}</h5>
+      </div>
+      <div class="card-body">
+        <div class="video-image w-100" *ngIf="video.url">
+          <img src="{{ getThumb(video.url) }}" class="w-100" />
+        </div>
+        <div class="video-image w-100" *ngIf="!video.url">
+          <img src="{{ getThumb(video.url) }}" class="w-100" />
+        </div>
+        <div class="video-buttons mt-3">
+          <a [routerLink]="['/ver-video', video.id]" routerLinkActive="active" class="btn btn-info mr-2">Leer</a>
+          <a [routerLink]="['/editar-video', video.id]" routerLinkActive="active"  class="btn btn-warning mr-2">Editar</a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#modal'+video.id">
+            Eliminar
+          </button>
+          <!-- Modal -->
+            <div class="modal fade" id="{{ 'modal' + video.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">seguro que deseas eliminar este video</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Recuerda esta accion no podra deshacerse. seguro que deseas eliminar el video {{video.title}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                    <a class="btn btn-danger" (click)="delete_video(video.id)" data-dismiss="modal">Eliminar Definitivamente</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" [routerLink]="['/inicio', previouspage]" routerLinkActive="active">Anterior</a></li>
+      <li class="page-item" *ngFor="let p of numberpages">
+        <a class="page-link" [routerLink]="['/inicio', p]" routerLinkActive="active" >{{p}}</a>
+      </li>
+      <li class="page-item"><a class="page-link" [routerLink]="['/inicio', nextpage]" routerLinkActive="active">Siguiente</a></li>
+    </ul>
+  </nav>
+</div>
+
+
+<div class="col-md-12 mt-3" *ngIf="!identity">
+  <div class="jumbotron">
+    <h1 class="display-4">Binevenido a la biblioteca de videos de youtube</h1>
+    <p class="lead">Esta pagina podras ver los videos que mas te interesen</p>
+    <hr class="my-4">
+
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" [routerLink]="['/registro']" routerLinkActive="active"
+        role="button">Registrate</a>
+      <a class="btn btn-success btn-lg ml-3" [routerLink]="['/login']" routerLinkActive="active"
+        role="button">Identificate</a>
+    </p>
+  </div>
+</div>

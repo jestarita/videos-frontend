@@ -1,0 +1,30 @@
+<div class="col-md-12 mt-3">
+<h1>{{page_title}}</h1>
+<hr>
+<div class="alert alert-success alert-dismissible col-md-3 mt-3" *ngIf="status == 'success'">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Exito!</strong> has iniciado sesi&oacute;n exitosamente
+  </div>
+  <div class="alert alert-danger alert-dismissible col-md-3 mt-3" *ngIf="status == 'error'">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> No se pudo iniciar sesion 
+  </div>
+
+<form class="col-md-3 ml-0 pl-0" #loginForm="ngForm" (ngSubmit)="iniciar_sesion(loginForm)">
+    <div class="form-group">
+        <label for="email">Correo</label>
+        <input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+        <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+           el correo no es valido
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="password">Contrase&ntilde;a</label>
+        <input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required/>
+        <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+            la contraseña  no es valida
+         </small>
+    </div>
+    <input type="submit" value="Loguearse" class="btn btn-success " [disabled]="loginForm.invalid">
+</form>
+</div>

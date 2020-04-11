@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" [routerLink]="['/inicio']" routerLinkActive="active">
+        <img src="/assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Videos Favoritos
+      </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="identity" [routerLink]="['/inicio']" routerLinkActive="active">mis videos </a>
+        </li>      
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="identity" [routerLink]="['/agregar-video']" routerLinkActive="active">Guardar favoritos</a>
+        </li>
+       
+       
+      </ul>
+
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item" >
+          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" *ngIf="!identity">Login</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" [routerLink]="['/registro']" routerLinkActive="active" *ngIf="!identity">Registrate</a>
+        </li>
+       
+        <li class="nav-item dropdown" *ngIf="identity">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+           {{identity.name + ' '+ identity.surname}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" >panel de usuario</a>
+            <a class="dropdown-item" >Mi perfil</a>
+            <a class="dropdown-item"  [routerLink]="['/ajustes']" routerLinkActive="active" >ajustes</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item pointer" [routerLink]="['/logout/1']" routerLinkActive="active" >Cerrar Sesi&oacute;n</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          &nbsp;&nbsp;&nbsp;
+        </li> 
+      </ul>
+    </div>
+  </nav>

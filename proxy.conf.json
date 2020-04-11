@@ -1,0 +1,7 @@
+{
+    "/backend-symfony/public/*":{
+        "target": "http://localhost/",
+        "secure": false,
+        "ChangeOrigin": true
+    }
+}
